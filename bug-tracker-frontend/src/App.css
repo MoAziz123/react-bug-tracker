@@ -1,0 +1,68 @@
+
+
+
+.navbar
+{
+  display:flex;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  
+
+}
+.links
+{
+
+  display: inline-flex;
+  
+}
+.search-bar
+{
+  display:inline-flex;
+  flex-direction: row;
+  padding:5px;
+}
+.search-bar *
+{
+  margin-right:5px;
+}
+.search-select
+{
+  width:250px;
+  color:black;
+}
+.bug-page button
+{
+  margin:10px;
+
+}
+
+.user-form
+{
+  height:auto;
+  width:300px;
+  padding: 10px;
+}
+.user-form *
+{
+  width:250px;
+  margin:10px;
+}
+.user-form button
+{
+  width:auto;
+}
+.user-form p
+{
+  color:red;
+  width:auto;
+}
+.user-form textarea
+{
+  width:400px;
+}
+.bug-page-buttons
+{
+  display:flex;
+  flex-direction:row;
+
+}
