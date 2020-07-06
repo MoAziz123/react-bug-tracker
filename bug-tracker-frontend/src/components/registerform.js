@@ -1,8 +1,8 @@
 import React  from 'react'
 import {Form, Button, Alert} from 'react-bootstrap'
-import {Router} from 'react-router'
+import {Router,Redirect} from 'react-router'
 import Axios from 'axios'
-
+import crypto from  'crypto-js'
 export class RegisterForm extends React.Component
 {
     constructor()
@@ -10,39 +10,79 @@ export class RegisterForm extends React.Component
         super()
         this.state=
         {
+            redirect:null,
             message: null,
-            bugs:[]
+            bugs:[],
+            user:
+            {
+                username:null,
+                password:null,
+                email:null,
+                address:null
+                
+            },
+            validate:
+            {
+                username:null,
+                password:null,
+                email:null,
+                address:null
+            }
+
         }
         
     }
-    componentDidMount()
-    {
-        Axios.get("http://localhost:8080/bugs", (response)=>
-        {
-            
-        })
-    }
+    
+    
+   
     handleSubmit(e)
     {
         e.preventDefault()
-        
-        Axios.get("http://localhost:8080/login/new", (response)=>
+        let password = crypto.MD5(this.state.user.password).toString()
+        Axios.post("http://localhost:8080/login/new",
         {
-            this.setState(this.state.message, response.data.message)
+            username: this.state.user.username,
+            password:password,
+            email:this.state.user.email,
+            address:this.state.user.address
+
         })
+        .then((response)=>
+        {
+            this.setState({message:response.data.message})
+            if(response.data.success)
+            {
+                this.setState({redirect:"../pages/LogInPage.js"})
+            }
+            
+        })
+      
 
     }
     render()
     {
+      
+        if(this.state.redirect)
+        {
+            return (<Redirect to={this.state.redirect}></Redirect>)
+        }
         return (
-            <div class="user-form">
+            <div className="user-form">
                 <Form>
                     <h1>Register Form</h1>
                     Username:
-                    <Form.Control type="text"></Form.Control>
+                    <Form.Control type="text" onChange={(e) => this.setState({user:{name:e.target.value}})}></Form.Control>
+                    <p>{this.state.validate.username}</p>
+                    Email:
+                    <Form.Control type="email" onChange={(e)=>this.setState({user:{email:e.target.value}})}></Form.Control>
+                    <p>{this.state.validate.email}</p>
                     Password:
-                    <Form.Control type="password"></Form.Control>
-                    <Button type="submit" onSubmit={this.handleSubmit()}>Register</Button>
+                    <Form.Control type="password"  onChange={(e) => this.setState({user:{password:e.target.value}})}></Form.Control>
+                    <p>{this.state.validate.password}</p>
+                    Address:
+                    <Form.Control type="text"  onChange={(e) => this.setState({user:{address:e.target.value}})}></Form.Control>
+                    <p>{this.state.validate.address}</p>
+                    <Button type="button" onClick={(e)=>this.handleSubmit(e)}>Register</Button>
                 </Form>
             </div>
 

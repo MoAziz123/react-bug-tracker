@@ -1,5 +1,6 @@
 import React  from 'react'
 import {Navigation} from '../components/nav-bar'
+import {AuthNavigation} from '../components/auth-nav-bar'
 import {Table} from '../components/table'
 import {Button} from 'react-bootstrap'
 import {AddForm} from '../components/addform'
@@ -13,6 +14,10 @@ export class BugPage extends React.Component
     
     render()
     {
+        if(!localStorage.getItem("token"))
+        {
+            return <p>You are not authenticated</p>
+        }
         return (
             <div className="bug-page">
                 <h1>This is the BugPage</h1>

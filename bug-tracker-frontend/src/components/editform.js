@@ -45,7 +45,8 @@ export class EditForm extends React.Component
             resolved:this.state.dataset.resolved,
             log_date:this.state.dataset.log_date
             
-        },(response)=>
+        },
+        (response)=>
         {
             this.setState(this.state.message, response.data.message)
         })

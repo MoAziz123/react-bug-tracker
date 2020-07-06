@@ -99,8 +99,7 @@ export class Table extends React.Component
     }
     render()
     {
-        let  {bugs} = this.state
-        if(bugs.bugs.length == 0)
+        if(this.state.bugs.length == 0)
         {
             return(
             <Alert type="error">No bugs found</Alert>

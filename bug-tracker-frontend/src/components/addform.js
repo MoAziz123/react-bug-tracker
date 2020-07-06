@@ -43,8 +43,6 @@ export class AddForm extends React.Component
         {
             title:this.state.dataset.title,
             description:this.state.dataset.description,
-            
-
         })
         .then((response)=>
         {
