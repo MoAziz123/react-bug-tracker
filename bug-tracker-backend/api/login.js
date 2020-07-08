@@ -1,19 +1,26 @@
+/**Router Config */
 const router =  require('express').Router()
+
+/**Mongoose Config */
 const mongoose = require('mongoose')
 const User = require('../models/User')
+
+/** Other Config*/
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 
-router.use(bodyParser.urlencoded())
-router.use(bodyParser.json())
-
-router.post('/login/new', (req, res)=>
-{
-    var user = new User(
+/**
+ * @route - /login/new
+ * @method - POST
+ * @reason - to add new users securely
+ * @description - adds users to collection
+ */
+router.post('/login/new', (req, res)=>{
+    let user = new User(
         {
             username:req.body.username,
             email:req.body.email,
-            pasword:req.body.password,
+            password:req.body.password,
             address:req.body.address
         }
     )

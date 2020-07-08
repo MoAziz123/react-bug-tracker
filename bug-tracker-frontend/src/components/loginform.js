@@ -22,16 +22,7 @@ export class LogInForm extends React.Component
         }
         
     }
-    componentWillMount()
-    {
-        if(localStorage.getItem("token"))
-        {
-            let token = localStorage.getItem("token")
-            
-            this.setState({authenticated:true})
 
-        }
-    }
     
     //sends email and pass to be authenticated by server via JWT
     handleSubmit(e)
@@ -62,7 +53,7 @@ export class LogInForm extends React.Component
     }
     render()
     {
-        if(this.state.authenticated)
+        if(localStorage.getItem("token"))
         {
             return(<Redirect to="/bugs"></Redirect>)
         }

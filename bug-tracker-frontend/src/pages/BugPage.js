@@ -18,14 +18,18 @@ export class BugPage extends React.Component
         {
             return <p>You are not authenticated</p>
         }
-        return (
-            <div className="bug-page">
-                <h1>This is the BugPage</h1>
-                <Table></Table>
-                <div class="bug-page-buttons">
-                <AddForm show={false}></AddForm>
+        else
+        {
+            return (
+                <div className="bug-page">
+                    <h1>This is the BugPage</h1>
+                    <Table></Table>
+                    <div class="bug-page-buttons">
+                    <AddForm show={false}></AddForm>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+       
     }
 }
