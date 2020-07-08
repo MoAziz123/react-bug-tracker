@@ -1,6 +1,8 @@
 import React  from 'react'
 import {Form, Button, Alert, Modal} from 'react-bootstrap'
 import Axios from 'axios'
+import crypto from 'crypto-js'
+import jwt from 'jsonwebtoken'
 
 export class AddForm extends React.Component
 {
@@ -22,25 +24,18 @@ export class AddForm extends React.Component
                 title:null,
                 description:null,
                 log_date:null
-            }
+            },
+            user_id:localStorage.getItem("user_id")
         }
     }
 
-    componentDidMount()
-    {
-        Axios.get("/bugs", (response)=>
-        {
-            this.setState({
-                bugs: response.data
-            })
-            
-        })
-    }
+   
     handleSubmit(e)
     {
         e.preventDefault()
         Axios.post("http://localhost:8080/bugs/new", 
         {
+            user_id:this.state.user_id,
             title:this.state.dataset.title,
             description:this.state.dataset.description,
         })

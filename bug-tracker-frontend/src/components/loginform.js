@@ -3,6 +3,7 @@ import {Form, Button, Alert} from 'react-bootstrap'
 import {Redirect} from 'react-router'
 import Axios from 'axios'
 import crypto from'crypto-js'
+import 'jsonwebtoken'
 
 export class LogInForm extends React.Component
 {
@@ -16,6 +17,7 @@ export class LogInForm extends React.Component
                 email:null,
                 password:null,
             },
+            authenticated:false,
             message:null
         }
         
@@ -25,10 +27,13 @@ export class LogInForm extends React.Component
         if(localStorage.getItem("token"))
         {
             let token = localStorage.getItem("token")
+            
+            this.setState({authenticated:true})
 
         }
     }
     
+    //sends email and pass to be authenticated by server via JWT
     handleSubmit(e)
     {
         e.preventDefault()
@@ -46,14 +51,20 @@ export class LogInForm extends React.Component
             {
                 localStorage.setItem("token", response.data.token)
             }
-        })
+            localStorage.setItem("user_id",()=>
+            {
+                let hash_string = "SALTYSALT" +response.data.user.address + response.data.user.username
+                return crypto.MD5(hash_string).toString()
+                
 
+            })
+        })
     }
     render()
     {
-        if(localStorage.getItem("token"))
+        if(this.state.authenticated)
         {
-            return(<Redirect  to="bugs"></Redirect>)
+            return(<Redirect to="/bugs"></Redirect>)
         }
         return (
             <div class="user-form">

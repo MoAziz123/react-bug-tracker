@@ -68,6 +68,7 @@ router.post('/login/submit',  (req,res) =>
                     password:user.password
                 }
                 let token = jwt.sign(payload, 'jwt_secret', {expiresIn:'3h'})
+                
             return res.json(
                 {
                     message:"User authenticated",

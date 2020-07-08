@@ -25,7 +25,7 @@ export class AuthNavigation extends React.Component
             <div className="links">
             <Nav.Link className="link" href="http://localhost:3000/bugs">Bugs</Nav.Link> 
             <Nav.Link onClick={()=>{this.handleLogOut()}}>Log Out</Nav.Link>
-            <Redirect to={this.state.redirect}></Redirect>
+            <Redirect to={this.state.redirect ? this.state.redirect : ""}></Redirect>
             </div>
             </Navbar>)
             

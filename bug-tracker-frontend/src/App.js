@@ -16,11 +16,11 @@ function App() {
   {
     if(localStorage.getItem("token"))
     {
-      return(<AuthNavigation></AuthNavigation>)
+      return(<AuthNavigation/>)
     }
     else
     {
-      return(<Navigation></Navigation>)
+      return(<Navigation/>)
     }
   }
   return (

@@ -4,14 +4,14 @@ const bodyParser = require('body-parser')
 
 router.use(bodyParser.urlencoded())
 router.use(bodyParser.json())
-router.get("/bugs", (req,res)=>
+router.post("/bugs", (req,res)=>
 {
-    Bug.find({}).then((item)=>
+    Bug.find({user_id:req.body.user_id}).then((item)=>
     {
         if(item.length == 0) 
             return res.json(
                 {
-                    bugs:item,
+                    bugs:[],
                     message:"No bugs found",
                     success:false
                 }
@@ -98,19 +98,27 @@ router.post("/bugs/update", (req, res)=>
     })
 })
 
-router.post("/bugs/archive", (req, res)=>
+router.get("/bugs/archive", (req, res)=>
 {
-    let bug = new Bug(req.body)
-    bug.save()
-    .then(() =>
+    Bug.find().then((item)=>
     {
+        
+        if(item.length == 0) 
+            return res.json(
+                {
+                    bugs:[],
+                    message:"No bugs found",
+                    success:false
+                }
+            )
         return res.json(
             {
-                success:true
+                bugs:item,
+                message: "bugs found",
+                success: true
             }
         )
     })
-    .catch((error) => console.error(error))
     
 })
 

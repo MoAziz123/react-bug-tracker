@@ -4,6 +4,7 @@ import Axios from 'axios'
 import { SearchBar } from './search-bar'
 import {EditForm} from './editform'
 import {DeleteForm} from  './deleteform'
+import crypto from 'crypto-js'
 
 export class Table extends React.Component
 {
@@ -21,13 +22,20 @@ export class Table extends React.Component
     }
     componentWillMount()
     {
-        Axios.get("http://localhost:8080/bugs")
+        let id=localStorage.getItem("user_id")
+        Axios.post("http://localhost:8080/bugs",
+        {
+            user_id:id
+        })
         .then((response)=>
         {
+            
             this.setState(
                 {
                     message: response.data.message,
-                    bugs:  response.data.bugs
+                    bugs:  response.data.bugs,
+                    user_id:id
+                    
                 }
             )
          
@@ -69,7 +77,10 @@ export class Table extends React.Component
         console.log(query.length)
         if(query != null)
         {
-            Axios.get("http://localhost:8080/bugs")
+            Axios.post("http://localhost:8080/bugs",
+            {
+                user_id:this.state.user_id
+            })
             .then((response) =>
             {
                 var array = response.data.bugs.filter((item) =>
@@ -86,7 +97,10 @@ export class Table extends React.Component
         }
         else
         {
-            Axios.get("http://localhost:8080/bugs")
+            Axios.post("http://localhost:8080/bugs",
+            {
+                user_id:this.state.user_id
+            })
             .then((response) =>
             {
                 this.setState({bugs:response.data.bugs})
