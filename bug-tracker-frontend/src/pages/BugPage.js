@@ -9,11 +9,9 @@ import Axios from 'axios'
 
 export class BugPage extends React.Component
 {
-
-    
-    
     render()
     {
+        
         if(!localStorage.getItem("token"))
         {
             return <p>You are not authenticated</p>
@@ -24,9 +22,6 @@ export class BugPage extends React.Component
                 <div className="bug-page">
                     <h1>This is the BugPage</h1>
                     <Table></Table>
-                    <div class="bug-page-buttons">
-                    <AddForm show={false}></AddForm>
-                    </div>
                 </div>
             )
         }

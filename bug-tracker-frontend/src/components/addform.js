@@ -3,14 +3,14 @@ import {Form, Button, Alert, Modal} from 'react-bootstrap'
 import Axios from 'axios'
 import crypto from 'crypto-js'
 import jwt from 'jsonwebtoken'
+import {Redirect}from 'react-router'
 
 export class AddForm extends React.Component
 {
     constructor(props)
     {
         super(props)
-        this.state = 
-        {
+        this.state = {
             dataset:
             {
                 title: null,
@@ -25,35 +25,40 @@ export class AddForm extends React.Component
                 description:null,
                 log_date:null
             },
-            user_id:localStorage.getItem("user_id")
+            user_id:localStorage.getItem("user_id"),
+            added:false
         }
     }
 
-   
-    handleSubmit(e)
-    {
+   /**
+    * handleSubmit()
+    * @args - event
+    * @description - sends form data to add to db
+    * @since 1.0.0
+    */
+    handleSubmit=e=>{
         e.preventDefault()
-        Axios.post("http://localhost:8080/bugs/new", 
-        {
+        Axios.post("http://localhost:8080/bugs/new", {
             user_id:this.state.user_id,
             title:this.state.dataset.title,
             description:this.state.dataset.description,
         })
         .then((response)=>
         {
-            this.setState({message:response.data.message})
+            this.setState({message:response.data.message,added:true})
         })
-        .catch((error) =>
-        {
-            console.log(error)
-        })
+        .catch((error) =>{console.log(error)})
         
         this.setState({dataset:{title:null, description:null, resolved:null, log_date:null}, show:false})
     }
-     updateTitle(e)
-    {
-        if(e.target.value.length < 10)
-        {
+    /**update<field>()
+     * @args - event
+     * @description - updates the form field whilst also checking for validity
+     * @since 1.0.0
+     *  
+     */
+    updateTitle=e=>{
+        if(e.target.value.length < 100){
             this.setState(
                 {
                     dataset:
@@ -69,23 +74,15 @@ export class AddForm extends React.Component
                         description:this.state.message.description,
                         log_date:this.state.message.log_date
                     }
-                }
-            )
-
-        }
-        
-        else
-        {
+                })}
+        else{
             this.setState({message:{title:"Please ensure your title is less than 100 characters", description:this.state.message.description, log_date:this.state.message.log_date}})
         }
     }
-    updateDesc(e)
-    {
-        if(e.target.value.length < 50)
-        {
-            this.setState(
-                {
-    
+
+    updateDesc(e){
+        if(e.target.value.length < 500){
+            this.setState({
                     dataset:
                     {
                         title:this.state.dataset.title,
@@ -99,15 +96,10 @@ export class AddForm extends React.Component
                         description:null,
                         log_date:this.state.message.log_date
                     }
-                }
-            )
-        }
-        else
-        {
+                })}
+        else{
             this.setState({message:{title:this.state.message.title, description:"Please ensure your description is less than 500 characters", log_date:this.state.message.log_date}})
         }
-        
-
     }
     render()
     {

@@ -12,26 +12,27 @@ export class LogInForm extends React.Component
         super()
         this.state=
         {
-            user:
-            {
-                email:null,
-                password:null,
-            },
+            email:null,
+            password:null,
             authenticated:false,
             message:null
         }
         
     }
-
-    
-    //sends email and pass to be authenticated by server via JWT
+    /**handleSubmit()
+     * @args - event
+     * @description -sends email and pass to be authenticated by server via
+     * JWT
+     * @since 1.1.0
+    */    
     handleSubmit(e)
     {
         e.preventDefault()
         let password = crypto.MD5(this.state.password).toString()
+        console.log(this.state.email,this.state.password)
         Axios.post("http://localhost:8080/login/submit",
         {
-            username:this.state.user,
+            email:this.state.email,
             password:password
             
         })
@@ -41,14 +42,9 @@ export class LogInForm extends React.Component
             if(response.data.token)
             {
                 localStorage.setItem("token", response.data.token)
+                localStorage.setItem("user_id",crypto.MD5("SALTYSALT" +response.data.user.address + response.data.user.username).toString())
+                window.location.assign("http://localhost:3000/login")
             }
-            localStorage.setItem("user_id",()=>
-            {
-                let hash_string = "SALTYSALT" +response.data.user.address + response.data.user.username
-                return crypto.MD5(hash_string).toString()
-                
-
-            })
         })
     }
     render()
@@ -63,9 +59,9 @@ export class LogInForm extends React.Component
                 <Form>
                     <h1>Log In Form</h1>
                     Email:
-                    <Form.Control type="email" onChange={(e)=> this.setState({user:{email:e.target.value}})}></Form.Control>
+                    <Form.Control type="text" onChange={(e)=>this.setState({email:e.target.value})}></Form.Control>
                     Password:
-                    <Form.Control type="password"onChange={(e)=>this.setState({user:{password:e.target.value}})}></Form.Control>
+                    <Form.Control type="password"onChange={(e)=>this.setState({password:e.target.value})}></Form.Control>
                     <Button type="button" onClick={(e)=>this.handleSubmit(e)}>Log In</Button>
                 </Form>
             </div>

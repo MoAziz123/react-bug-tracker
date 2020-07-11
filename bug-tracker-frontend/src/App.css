@@ -54,7 +54,7 @@
 .user-form p
 {
   color:red;
-  width:auto;
+  width:100%;
 }
 .user-form textarea
 {

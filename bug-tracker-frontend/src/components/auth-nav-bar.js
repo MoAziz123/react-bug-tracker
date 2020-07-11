@@ -7,15 +7,17 @@ export class AuthNavigation extends React.Component
     constructor()
     {
         super()
-        this.state=
-        {
-            redirect:null
-        }
+        this.state={redirect:null}
     }
-    handleLogOut()
-    {
+    /**
+     * handleLogOut()
+     * @args - none
+     * @description - logs out the user by deleting the token from localstorage
+     * @since 1.0.0
+     */
+    handleLogOut =()=>{
         localStorage.removeItem("token")
-        this.setState({redirect:"/login"})
+        window.location.assign("http://localhost:3000/login")
 
     }
     render()

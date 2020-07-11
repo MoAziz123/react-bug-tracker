@@ -1,130 +1,90 @@
-/**Router Config */
+/**Express */
 const router =  require('express').Router()
 
 /**Mongoose Config */
-const mongoose = require('mongoose')
 const User = require('../models/User')
 
-/** Other Config*/
+/** Routes Config*/
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 
+/**
+ * @route - /login/get
+ * @method - GET
+ * @reason - does not have secure data
+ * @description - gets all users
+*/
+
+router.get('/login/all',(req,res)=>{
+    User.find({}).then((users)=>{
+        return res.json({
+                users
+            })})
+})
 /**
  * @route - /login/new
  * @method - POST
  * @reason - to add new users securely
  * @description - adds users to collection
- */
+*/
 router.post('/login/new', (req, res)=>{
-    let user = new User(
-        {
+    let new_user = new User({
             username:req.body.username,
             email:req.body.email,
             password:req.body.password,
             address:req.body.address
-        }
-    )
+        })
+    
     User.find({email:req.body.email})
-    .then((user)=>
-    {
-        if(user)
-        {
-            return res.json({message:"User already exists"})
+    .then((user)=>{
+        if(user.length != 0){
+            return res.json({message:"User already exists", success:true, auth:false})
         }
-    })
-    .catch((error)=>{console.log(error)})
-
-    user.save()
-    .then((user)=>
-            {
-                return res.json(
-                    {
-                        message:"Account successfully created",
-                        success:true,
-                        user:user,
-                        
-                    }
-                )
-            })
-            .catch((error) => 
-            {
-                console.log("error")
-                return res.json(
-                    {
-                        message:"Account unable to be created",
-                        success:false
         
-                    }
-                )
-            }
-            )
+        new_user.save()
+        .then((user)=>{
+            return res.json({
+                    message:"Account successfully created",
+                    success:true,
+                    user:user,
+                    auth:true
+                })})
+        .catch((error)=>console.error(error))
     })
+    .catch((error)=>console.log(error))
+})
 
 
+/**
+ * @route - /login/submit
+ * @method - POST
+ * @reason - to authenticate users without exposing details
+ * @description - authenticates users via JWT
+*/
 router.post('/login/submit',  (req,res) =>
 {
-    let counter = 0
-    User.find({email:req.body.email, password:req.body.password})
-    .then((user)=>
-        {
-            if(user)
-            {
-                let payload =
-                {
-                    email:user.email,
-                    password:user.password
-                }
+    console.log(req.body.email,req.body.password)
+    User.findOne({email:req.body.email, password:req.body.password})
+    .then((user)=>{
+            console.log(user)
+            if(user){
+                let payload ={email:user.email,password:user.password}
                 let token = jwt.sign(payload, 'jwt_secret', {expiresIn:'3h'})
-                
-            return res.json(
-                {
+                return res.json({
                     message:"User authenticated",
                     token,
-                    success:true,
+                    auth:true,
                     user: {username:user.username, email:user.email, address:user.address},
                     id:user._id
                 }
-            )
+            )}
+            else{
+                return res.json({message:"Incorrect login attempt "})
             }
-            else
-            {
-                counter++
-                if(counter < 3)
-                {
-                    return res.json(
-                        {
-                            message:"Incorrect login - "+counter+" attempt",
-                        }
-                    )
-                }
-                else
-                {
-                    return res.json(
-                        {
-                            message:"Locked out of system for 5 minutes",
-                            lockout:true
-                        }
-                    )
-                }
-                
-            }
-            
         }
     )
     .catch((error) => console.error(error))
 
-
-
-
-})
-router.post('/login/forget', (req, res)=>
-{
-    var login = new LogIn(
-        {
-            username:req.body.username, 
-            password:req.body.password
-        }
-    )
 })
 
 module.exports =  router

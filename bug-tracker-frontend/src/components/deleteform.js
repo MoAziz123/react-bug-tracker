@@ -7,18 +7,18 @@ export class DeleteForm extends React.Component
     constructor(props)
     {
         super(props)
-        this.state = {
-
-            show:this.props.show,
-           
-
-
-        }
+        this.state = {show:this.props.show}
     }
-    handleDelete()
-    {
+    /**
+     * @args - none
+     * @description - sends id to delete from bugs table
+     * @since 1.0.0
+     */
+    handleDelete=()=>{
         Axios.post("http://localhost:8080/bugs/delete",{id:this.props.dataset._id})
-        this.setState({show:false})
+        .then((response)=>{
+            this.setState({show:false})
+        })
     }
     render()
     {
@@ -34,9 +34,6 @@ export class DeleteForm extends React.Component
             </Modal>
             <Button type="button" onClick={()=>this.setState({show:true})}>Delete</Button>
             </div>
-            
             )
-
-
     }
 }
