@@ -15,9 +15,10 @@ export class DeleteForm extends React.Component
      * @since 1.0.0
      */
     handleDelete=()=>{
-        Axios.post("http://localhost:8080/bugs/delete",{id:this.props.dataset._id})
+        Axios.delete("http://localhost:8080/bugs/delete",{data:{id:this.props.dataset._id}})
         .then((response)=>{
             this.setState({show:false})
+            window.location.assign("")
         })
     }
     render()

@@ -48,8 +48,8 @@ export class AddForm extends React.Component
             this.setState({message:response.data.message,added:true})
         })
         .catch((error) =>{console.log(error)})
-        
         this.setState({dataset:{title:null, description:null, resolved:null, log_date:null}, show:false})
+        window.location.assign("")
     }
     /**update<field>()
      * @args - event

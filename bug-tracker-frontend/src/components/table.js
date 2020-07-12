@@ -28,10 +28,7 @@ export class Table extends React.Component
      */
     componentWillMount(){
         let id=localStorage.getItem("user_id")
-        Axios.post("http://localhost:8080/bugs",
-        {
-            user_id:id
-        })
+        Axios.get('http://localhost:8080/bugs/'+id)
         .then((response)=>{   
             this.setState(
                 {
@@ -47,7 +44,7 @@ export class Table extends React.Component
      * checkMessage()
      * @args - none
      * @description - checks if message was succesful
-     * 
+     * @since 1.0.0
      */
     checkMessage(success){
         if(success)
@@ -83,9 +80,7 @@ export class Table extends React.Component
         var query = e.target.value
         console.log(query.length)
         if(query != null){
-            Axios.post("http://localhost:8080/bugs",{
-                user_id:this.state.user_id
-            })
+            Axios.get("http://localhost:8080/bugs/"+this.state.user_id)
             .then((response) =>{
                 var array = response.data.bugs.filter((item) =>{
                     if(item.title.startsWith(query)){                    

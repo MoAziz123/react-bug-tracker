@@ -4,11 +4,6 @@ const router =  require('express').Router()
 /**Models */
 const Bug = require('../models/Bug')
 
-/**Router Config */
-const bodyParser = require('body-parser')
-router.use(bodyParser.urlencoded())
-router.use(bodyParser.json())
-
 /**Routes */
 
 /**
@@ -17,9 +12,10 @@ router.use(bodyParser.json())
  * @reason - does not require secure data
  * @description - gets all bugs that are attached to user
  */
-router.post("/bugs", (req,res)=>{
-    let {user_id}=req.body
-    Bug.find({user_id}).then((item)=>{
+router.get("/bugs/:user_id", (req,res)=>{
+    let {user_id}=req.params
+    Bug.find({user_id})
+    .then((item)=>{
         if(item.length == 0) 
             return res.json({
                     bugs:[],
@@ -59,8 +55,9 @@ router.post("/bugs/new", (req, res)=>{
  * @reason - semantically correct
  * @description - deletes bug from req id
  * */
-router.post("/bugs/delete", (req, res)=>{
-    Bug.findOneAndDelete({_id:req.body.id}).then(()=>{
+router.delete("/bugs/delete", (req, res)=>{
+    Bug.findOneAndDelete({_id:req.body.id})
+    .then(()=>{
         return res.json({
                 message:"Bug has been deleted",
                 success:true
@@ -75,9 +72,11 @@ router.post("/bugs/delete", (req, res)=>{
  * @route - /bugs/update
  * @method - PUT
  * @reason - semantically correct, also just sends data
+ * @description- updates the data using the user id to locate
  */
-router.post("/bugs/update", (req, res)=>{
-    Bug.findOneAndUpdate({_id:req.body.id},req.body).then(()=>{
+router.put("/bugs/update", (req, res)=>{
+    Bug.findOneAndUpdate({_id:req.body.id},req.body)
+    .then(()=>{
         return res.json({
                 message: "Bug has been updated",
                 success:true

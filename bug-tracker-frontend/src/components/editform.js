@@ -41,16 +41,19 @@ export class EditForm extends React.Component
     {
         e.preventDefault()
         console.log(this.props.dataset._id)
-        Axios.post("http://localhost:8080/bugs/update", {
-            id:this.props.dataset._id,
-            title:this.state.dataset.title,
-            description:this.state.dataset.description,
-            resolved:this.state.dataset.resolved,
-            log_date:this.state.dataset.log_date
+        Axios.put("http://localhost:8080/bugs/update", {
+            
+                id:this.props.dataset._id,
+                title:this.state.dataset.title,
+                description:this.state.dataset.description,
+                resolved:this.state.dataset.resolved,
+                log_date:this.state.dataset.log_date
+            
         },(response)=>{
             this.setState(this.state.message, response.data.message)
         })
         this.setState({show:false})
+        window.location.assign("")
     }
     /**
      * convertDate()

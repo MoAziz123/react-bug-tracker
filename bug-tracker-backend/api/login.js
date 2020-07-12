@@ -5,7 +5,6 @@ const router =  require('express').Router()
 const User = require('../models/User')
 
 /** Routes Config*/
-const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 
 /**
@@ -14,7 +13,6 @@ const jwt = require('jsonwebtoken')
  * @reason - does not have secure data
  * @description - gets all users
 */
-
 router.get('/login/all',(req,res)=>{
     User.find({}).then((users)=>{
         return res.json({
