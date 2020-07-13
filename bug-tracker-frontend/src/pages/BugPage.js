@@ -11,9 +11,7 @@ export class BugPage extends React.Component
 {
     render()
     {
-        
-        if(!localStorage.getItem("token"))
-        {
+        if(!localStorage.getItem("token")){
             return <p>You are not authenticated</p>
         }
         else

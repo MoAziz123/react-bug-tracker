@@ -39,8 +39,7 @@ export class LogInForm extends React.Component
         .then((response)=>
         {
             this.setState({message: response.data.message})
-            if(response.data.token)
-            {
+            if(response.data.token){
                 localStorage.setItem("token", response.data.token)
                 localStorage.setItem("user_id",crypto.MD5("SALTYSALT" +response.data.user.address + response.data.user.username).toString())
                 window.location.assign("http://localhost:3000/login")
@@ -49,8 +48,7 @@ export class LogInForm extends React.Component
     }
     render()
     {
-        if(localStorage.getItem("token"))
-        {
+        if(localStorage.getItem("token")){
             return(<Redirect to="/bugs"></Redirect>)
         }
         return (
