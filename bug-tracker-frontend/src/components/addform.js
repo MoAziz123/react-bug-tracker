@@ -39,6 +39,10 @@ export class AddForm extends React.Component
     handleSubmit=e=>{
         e.preventDefault()
         Axios.post("http://localhost:8080/bugs/new", {
+            headers:
+            {
+                'x-access-token':localStorage.getItem("token")
+            },
             user_id:this.state.user_id,
             title:this.state.dataset.title,
             description:this.state.dataset.description,

@@ -42,6 +42,10 @@ export class EditForm extends React.Component
         e.preventDefault()
         console.log(this.props.dataset._id)
         Axios.put("http://localhost:8080/bugs/update", {
+            headers:
+            {
+                'x-access-token':localStorage.getItem("token")
+            },
             
                 id:this.props.dataset._id,
                 title:this.state.dataset.title,

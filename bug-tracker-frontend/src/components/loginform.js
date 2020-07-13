@@ -32,6 +32,7 @@ export class LogInForm extends React.Component
         console.log(this.state.email,this.state.password)
         Axios.post("http://localhost:8080/login/submit",
         {
+            
             email:this.state.email,
             password:password
             

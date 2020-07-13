@@ -28,7 +28,10 @@ export class Table extends React.Component
      */
     componentWillMount(){
         let id=localStorage.getItem("user_id")
-        Axios.get('http://localhost:8080/bugs/'+id)
+        Axios.get('http://localhost:8080/bugs/'+id,{
+            headers:{
+            'x-access-token':localStorage.getItem("token")
+        }})
         .then((response)=>{   
             this.setState(
                 {
@@ -80,7 +83,11 @@ export class Table extends React.Component
         var query = e.target.value
         console.log(query.length)
         if(query != null){
-            Axios.get("http://localhost:8080/bugs/"+this.state.user_id)
+            Axios.get("http://localhost:8080/bugs/"+this.state.user_id,{
+                headers:{
+                'x-access-token':localStorage.getItem("token")
+                }
+            })
             .then((response) =>{
                 var array = response.data.bugs.filter((item) =>{
                     if(item.title.startsWith(query)){                    
@@ -93,6 +100,9 @@ export class Table extends React.Component
         }
         else{
             Axios.post("http://localhost:8080/bugs",{
+                headers:{
+                'x-access-token':localStorage.getItem("token")
+                },
                 user_id:this.state.user_id
             })
             .then((response) =>{
