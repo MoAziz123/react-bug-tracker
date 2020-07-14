@@ -34,7 +34,7 @@ export class RegisterForm extends React.Component
      * @since 1.0.0
      */
     checkValidate=()=>{
-        if(this.state.validate.username === null && this.state.validate.password===null  &&   this.state.validate.email===null)
+        if(this.state.validate.username === null || this.state.validate.password===null  ||   this.state.validate.email===null)
             return true
     }
    
