@@ -62,7 +62,7 @@ export class AddForm extends React.Component
      *  
      */
     updateTitle=e=>{
-        if(e.target.value.length < 100){
+        if(e.target.value.length < 10){
             this.setState(
                 {
                     dataset:
@@ -80,12 +80,12 @@ export class AddForm extends React.Component
                     }
                 })}
         else{
-            this.setState({message:{title:"Please ensure your title is less than 100 characters", description:this.state.message.description, log_date:this.state.message.log_date}})
+            this.setState({message:{title:"Please ensure your title is less than 10 characters", description:this.state.message.description, log_date:this.state.message.log_date}})
         }
     }
 
     updateDesc(e){
-        if(e.target.value.length < 500){
+        if(e.target.value.length < 50){
             this.setState({
                     dataset:
                     {
@@ -102,7 +102,7 @@ export class AddForm extends React.Component
                     }
                 })}
         else{
-            this.setState({message:{title:this.state.message.title, description:"Please ensure your description is less than 500 characters", log_date:this.state.message.log_date}})
+            this.setState({message:{title:this.state.message.title, description:"Please ensure your description is less than 50 characters", log_date:this.state.message.log_date}})
         }
     }
     render()
