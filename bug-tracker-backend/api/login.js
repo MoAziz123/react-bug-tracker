@@ -3,6 +3,7 @@ const router =  require('express').Router()
 
 /**Mongoose Config */
 const User = require('../models/User')
+const mongoose = require('mongoose')
 
 /** Routes Config*/
 const jwt = require('jsonwebtoken')
@@ -61,7 +62,6 @@ router.post('/login/new', (req, res)=>{
 */
 router.post('/login/submit',  (req,res) =>
 {
-    console.log(req.body.email,req.body.password)
     User.findOne({email:req.body.email, password:req.body.password})
     .then((user)=>{
             console.log(user)

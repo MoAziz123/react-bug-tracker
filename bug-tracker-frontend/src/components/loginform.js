@@ -3,7 +3,6 @@ import {Form, Button, Alert} from 'react-bootstrap'
 import {Redirect} from 'react-router'
 import Axios from 'axios'
 import crypto from'crypto-js'
-import 'jsonwebtoken'
 
 export class LogInForm extends React.Component
 {
@@ -29,23 +28,21 @@ export class LogInForm extends React.Component
     {
         e.preventDefault()
         let password = crypto.MD5(this.state.password).toString()
-        console.log(this.state.email,this.state.password)
-        Axios.post("http://localhost:8080/login/submit",
-        {
+        Axios.post("http://localhost:8080/login/submit",{
             
             email:this.state.email,
             password:password
             
         })
-        .then((response)=>
-        {
+        .then((response)=>{
             this.setState({message: response.data.message})
             if(response.data.token){
                 localStorage.setItem("token", response.data.token)
                 localStorage.setItem("user_id",crypto.MD5("SALTYSALT" +response.data.user.address + response.data.user.username).toString())
-                window.location.assign("http://localhost:3000/login")
+              
             }
         })
+        .catch(error=>console.error(error))
     }
     render()
     {

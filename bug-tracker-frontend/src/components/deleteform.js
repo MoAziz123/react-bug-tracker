@@ -22,6 +22,10 @@ export class DeleteForm extends React.Component
             },
             data:{id:this.props.dataset._id}})
         .then((response)=>{
+            if(!response.data.auth){
+                localStorage.removeItem("token")
+                window.location.assign("http://localhost:3000/login")
+            }
             this.setState({show:false})
             window.location.assign("")
         })

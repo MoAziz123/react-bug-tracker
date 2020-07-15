@@ -1,3 +1,4 @@
+
 /** Express */
 const express = require('express');
 const app = express();
@@ -6,6 +7,8 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const mongoose =  require('mongoose');
+const jwt = require('jsonwebtoken');
+const { createServer } = require('http');
 
 /** Configure CORS */
 app.use(cors())
@@ -23,6 +26,7 @@ mongoose.connect("mongodb://localhost:27017/bug-tracker", () => {
     console.log("MONGOOSE CONNECTION ESTABLISHED")
 })
 .then(() => {
+    
     app.listen(8080, () => {
         console.log('API CONNECTED SUCCESSFULLY')
     })

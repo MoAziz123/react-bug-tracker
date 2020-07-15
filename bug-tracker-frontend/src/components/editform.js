@@ -31,6 +31,7 @@ export class EditForm extends React.Component
             }
         }
     }
+    
     /**
      *handleSubmit()
      *@args - event
@@ -54,6 +55,10 @@ export class EditForm extends React.Component
                 log_date:this.state.dataset.log_date
             
         },(response)=>{
+            if(!response.data.auth){
+                localStorage.removeItem("token")
+                window.location.assign("http://localhost:3000/login")
+            }
             this.setState(this.state.message, response.data.message)
         })
         this.setState({show:false})

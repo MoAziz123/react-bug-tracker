@@ -29,7 +29,7 @@ export class AddForm extends React.Component
             added:false
         }
     }
-
+    
    /**
     * handleSubmit()
     * @args - event
@@ -49,6 +49,10 @@ export class AddForm extends React.Component
         })
         .then((response)=>
         {
+            if(!response.data.auth){
+                localStorage.removeItem("token")
+                window.location.assign("http://localhost:3000/login")
+            }
             this.setState({message:response.data.message,added:true})
         })
         .catch((error) =>{console.log(error)})

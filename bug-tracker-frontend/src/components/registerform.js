@@ -29,15 +29,13 @@ export class RegisterForm extends React.Component
     /**
      * checkValidate()
      * @args - none
-     * @description- checks to see if the fields are validated via checking
-     * if the validation message is shown
+     * @description - validates the fields by checking for null in each validation message
      * @since 1.0.0
      */
-    checkValidate=()=>{
-        if(this.state.validate.username === null && this.state.validate.password===null  &&   this.state.validate.email===null)
+    checkValidate = ()=>{
+        if(this.state.validate.email === null && this.state.validate.password === null && this.state.validate.username === null)
             return true
     }
-   
     /**
      * handleSubmit()
      * @args - event

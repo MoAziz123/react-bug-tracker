@@ -20,6 +20,10 @@ export class SearchBar extends React.Component
         var query = this.state.value
         Axios.get("http://localhost:8080/bugs", {title:this.state.value})
         .then((response)=>{
+            if(!response.data.auth){
+                localStorage.removeItem("token")
+                window.location.assign("http://localhost:3000/login")
+            }
             this.setState({bugs:response.data.bugs})
             this.state.bugs.filter((item) =>{
                 if(item.title.startsWith(query))
