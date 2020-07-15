@@ -110,7 +110,7 @@ export class EditForm extends React.Component
                     }
                 })}
         else{
-            this.setState({message:{title:"Please ensure your title is less than 100 characters", description:this.state.message.description, log_date:this.state.message.log_date}})
+            this.setState({message:{title:"Please ensure your title is less than 10 characters", description:this.state.message.description, log_date:this.state.message.log_date}})
         }
     }
 
@@ -132,7 +132,7 @@ export class EditForm extends React.Component
                     }
                 })}
         else{
-            this.setState({message:{title:this.state.message.title, description:"Please ensure your description is less than 500 characters", log_date:this.state.message.log_date}})
+            this.setState({message:{title:this.state.message.title, description:"Please ensure your description is less than 50 characters", log_date:this.state.message.log_date}})
         }
     }
    
