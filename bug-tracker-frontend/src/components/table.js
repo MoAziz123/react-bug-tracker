@@ -128,6 +128,7 @@ export class Table extends React.Component
 
         return (
             <div className="table">
+                <h1>Your Bugs</h1>
                 <Alert variant="success">{this.state.message || ""}</Alert>
                 <div className="search-bar">
                 <label>Search:</label>

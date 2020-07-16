@@ -18,7 +18,7 @@ export class BugPage extends React.Component
         {
             return (
                 <div className="bug-page">
-                    <h1>This is the BugPage</h1>
+                    
                     <Table></Table>
                 </div>
             )

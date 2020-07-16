@@ -20,8 +20,8 @@ export class AuthNavigation extends React.Component
     }
     render()
     {
-        return (<Navbar bg="dark" className="navbar">
-            <Navbar.Brand>react-bug-tracker</Navbar.Brand>
+        return (<Navbar  className="navbar">
+            <Navbar.Brand className="logo" title="track">bug</Navbar.Brand>
             <div className="links">
             <Nav.Link className="link" href="http://localhost:3000/bugs">Bugs</Nav.Link> 
             <Nav.Link className="link"onClick={()=>{this.handleLogOut()}}>Log Out</Nav.Link>

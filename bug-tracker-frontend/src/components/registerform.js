@@ -222,10 +222,11 @@ export class RegisterForm extends React.Component
             return (<Redirect to={this.state.redirect}></Redirect>)
         }
         return (
-            <div className="user-form">
+            <div className="user-form auth-form">
                 <Alert>{this.state.message}</Alert>
                 <Form>
-                    <h1>Register Form</h1>
+                <h1 className="logo" title="track">bug</h1>
+                    <h4 className="tagline">Register</h4>
                     Name:
                     <Form.Control type="text" onChange={(e) => this.updateUsername(e)}></Form.Control>
                     <p>{this.state.validate.username}</p>
