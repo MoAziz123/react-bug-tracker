@@ -38,8 +38,7 @@ export class EditForm extends React.Component
      *@description - sends form data for updating in database
      *@since 1.0.0
      */
-    handleSubmit(e)
-    {
+    handleSubmit=e=>{
         e.preventDefault()
         console.log(this.props.dataset._id)
         Axios.put("http://localhost:8080/bugs/update", {

@@ -43,13 +43,15 @@ router.get("/bugs/:user_id", (req,res)=>{
  * @description - adds a new bug into mongoDB via form filled model
  */
 router.post("/bugs/new", (req, res)=>{
+    console.log(req.body)
     let bug = new Bug(req.body)
     .save()
     .then(()=>{
         return res.json({
                 message:"Succeeded",
                 success:true,
-                bug:bug
+                bug:bug,
+                auth:true
             })
     })
     .catch((error)=>{console.log(error)})
@@ -61,11 +63,13 @@ router.post("/bugs/new", (req, res)=>{
  * @description - deletes bug from req id
  * */
 router.delete("/bugs/delete", (req, res)=>{
+    console.log(req.body)
     Bug.findOneAndDelete({_id:req.body.id})
     .then(()=>{
         return res.json({
                 message:"Bug has been deleted",
-                success:true
+                success:true,
+                auth:true
             })
     })
     .catch((error)=>{
@@ -80,11 +84,13 @@ router.delete("/bugs/delete", (req, res)=>{
  * @description- updates the data using the user id to locate
  */
 router.put("/bugs/update", (req, res)=>{
+    console.log(req.body)
     Bug.findOneAndUpdate({_id:req.body.id},req.body)
     .then(()=>{
         return res.json({
                 message: "Bug has been updated",
-                success:true
+                success:true,
+                auth:true
             })
     })
     .catch((error)=>{return res.json(error)})

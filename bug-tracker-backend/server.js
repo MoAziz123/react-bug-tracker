@@ -23,10 +23,11 @@ app.use(bodyParser.json())
  * @description - used to verify any request on the secure part of the site
  * @since 1.0.0
  */
-app.use('/', (req,res,next)=>{
+/*app.use('/', (req,res,next)=>{
     if(req.path.includes('/bugs')){
-        let decoded = jwt.verify(req.header('x-access-token'), "jwt_secret")
-        console.log(decoded.exp > Date.now())
+        let decoded = jwt.verify(req.header
+        ('x-access-token'))
+        console.log(decoded)
         if(decoded.exp > Date.now()){
             return res.json({
                     auth:false
@@ -35,7 +36,8 @@ app.use('/', (req,res,next)=>{
         return next()
     }
     next()
-})
+})*/
+
 /** Configure Routes */
 app.use('/', require('./api/bugs'))
 app.use('/', require('./api/login'))

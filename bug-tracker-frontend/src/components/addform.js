@@ -45,7 +45,7 @@ export class AddForm extends React.Component
             },
             user_id:this.state.user_id,
             title:this.state.dataset.title,
-            description:this.state.dataset.description,
+            description:this.state.dataset.description
         })
         .then((response)=>
         {
