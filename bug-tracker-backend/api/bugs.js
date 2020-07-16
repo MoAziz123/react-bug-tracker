@@ -2,30 +2,13 @@
 /**Requires*/
 const router =  require('express').Router()
 const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose')
 
 /**Models */
 const Bug = require('../models/Bug')
-const mongoose = require('mongoose')
 
 /**Routes */
 
-/**
- * @route - /
- * @method - ALL
- * @reason - used for decoding jwt to check for expiry
- * @description - decodes JWT and checks if verified - if not, then rejects and returns to client else continue
- */
-router.use('/', (req,res)=>{
-    let token = req.header('x-access-token')
-    if(token){
-        let decoded_token = jwt.verify(token, "jwt_secret")
-        console.log(decoded_token.payload)
-        if(decoded_token)
-            next()
-        else
-        return res.json({auth:false})
-    }
-})
 /**
  * @route - /bugs
  * @method - GET
@@ -38,19 +21,14 @@ router.get('/bugs', (req,res)=>{
         return res.json({item})
     })
     .catch(error=>console.error(error))
+  
 })
 router.get("/bugs/:user_id", (req,res)=>{
     let {user_id}=req.params
     Bug.find({user_id})
     .then((item)=>{
-        if(item.length == 0) 
-            return res.json({
-                    bugs:[],
-                    message:"No bugs found",
-                    success:false
-                })
         return res.json({
-                bugs:item,
+                bugs:item.length == 0 ? [] : item,
                 message: "bugs found",
                 success: true
             })

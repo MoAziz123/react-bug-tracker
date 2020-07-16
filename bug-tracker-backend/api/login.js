@@ -8,18 +8,7 @@ const mongoose = require('mongoose')
 /** Routes Config*/
 const jwt = require('jsonwebtoken')
 
-/**
- * @route - /login/get
- * @method - GET
- * @reason - does not have secure data
- * @description - gets all users
-*/
-router.get('/login/all',(req,res)=>{
-    User.find({}).then((users)=>{
-        return res.json({
-                users
-            })})
-})
+
 /**
  * @route - /login/new
  * @method - POST

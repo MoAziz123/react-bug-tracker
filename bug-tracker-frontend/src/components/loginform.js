@@ -29,7 +29,10 @@ export class LogInForm extends React.Component
         e.preventDefault()
         let password = crypto.MD5(this.state.password).toString()
         Axios.post("http://localhost:8080/login/submit",{
-            
+            headers:
+            {
+                'x-access-token':localStorage.getItem("token")
+            },
             email:this.state.email,
             password:password
             
@@ -39,6 +42,7 @@ export class LogInForm extends React.Component
             if(response.data.token){
                 localStorage.setItem("token", response.data.token)
                 localStorage.setItem("user_id",crypto.MD5("SALTYSALT" +response.data.user.address + response.data.user.username).toString())
+                window.location.assign("http://localhost:3000/bugs")
               
             }
         })

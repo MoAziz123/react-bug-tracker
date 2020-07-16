@@ -106,7 +106,7 @@ export class Table extends React.Component
                 user_id:this.state.user_id
             })
             .then((response) =>{
-                this.setState({bugs:response.data.bugs})
+                this.setState({message:response.data.bugs})
             })
             .catch((error)  => console.error(error))
         }
@@ -117,6 +117,10 @@ export class Table extends React.Component
             return(
             <>
             <Alert type="error">No bugs found</Alert>
+            <div className="search-bar">
+                <label>Search:</label>
+                <input type="text" autocomplete="on" onChange={(e) => this.handleQuery(e)}></input>
+                </div>
             <AddForm show={false}></AddForm>
             </>
             )

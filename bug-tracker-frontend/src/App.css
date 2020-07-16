@@ -41,15 +41,25 @@
   height:auto;
   width:300px;
   padding: 10px;
+  font-family: "Poppins";
 }
 .user-form *
 {
-  width:250px;
+  width:100%;
   margin:10px;
 }
 .user-form button
 {
-  width:auto;
+  background-color:lightcoral;
+  width:100%;
+  border-radius:0;
+  border:0;
+  transition:background-color 250ms;
+}
+.user-form button:hover
+{
+  filter:brightness(75%);
+  background-color: red;
 }
 .user-form p
 {
