@@ -156,6 +156,11 @@
 {
   border-radius:5px;
 }
+.table-error
+{
+  background-color:white;
+  border-radius:5px;
+}
 .table h1
 {
   padding-left:10px;

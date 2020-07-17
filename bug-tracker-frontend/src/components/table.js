@@ -115,14 +115,14 @@ export class Table extends React.Component
     {
         if(this.state.bugs.length == 0){
             return(
-            <>
+            <div className="table-error">
             <Alert type="error">No bugs found</Alert>
             <div className="search-bar">
                 <label>Search:</label>
                 <input type="text" autocomplete="on" onChange={(e) => this.handleQuery(e)}></input>
                 </div>
             <AddForm show={false}></AddForm>
-            </>
+            </div>
             )
         }
 
