@@ -42,10 +42,7 @@ export class EditForm extends React.Component
         e.preventDefault()
         console.log(this.props.dataset._id)
         Axios.put("http://localhost:8080/bugs/update", {
-            headers:
-            {
-                'x-access-token':localStorage.getItem("token")
-            },
+           
             
                 id:this.props.dataset._id,
                 title:this.state.dataset.title,
@@ -53,6 +50,12 @@ export class EditForm extends React.Component
                 resolved:this.state.dataset.resolved,
                 log_date:this.state.dataset.log_date
             
+        },
+        {
+            headers:
+            {
+                'x-access-token':localStorage.getItem("token")
+            }
         },(response)=>{
             if(!response.data.auth){
                 localStorage.removeItem("token")

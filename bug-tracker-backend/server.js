@@ -8,6 +8,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser');
 const mongoose =  require('mongoose');
 const jwt = require('jsonwebtoken');
+const assert = require('assert')
 
 /** Configure CORS */
 app.use(cors())
@@ -23,20 +24,17 @@ app.use(bodyParser.json())
  * @description - used to verify any request on the secure part of the site
  * @since 1.0.0
  */
-/*app.use('/', (req,res,next)=>{
+app.use('/', (req,res,next)=>{
     if(req.path.includes('/bugs')){
-        let decoded = jwt.verify(req.header
-        ('x-access-token'))
-        console.log(decoded)
-        if(decoded.exp > Date.now()){
-            return res.json({
-                    auth:false
-                })
+        let token = req.get('x-access-token')
+        let decoded = jwt.decode(token, {complete:true})
+        if((Date.now()/1000) > decoded.payload.exp){
+            return({auth:false})
         }
+        
         return next()
     }
-    next()
-})*/
+})
 
 /** Configure Routes */
 app.use('/', require('./api/bugs'))
