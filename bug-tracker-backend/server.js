@@ -42,7 +42,7 @@ app.use('/', require('./api/bugs'))
 app.use('/', require('./api/login'))
 
 /** Launch 🚀 */
-mongoose.connect("mongodb://localhost:27017/bug-tracker",() => {
+mongoose.connect("mongodb+srv://mo:mo123@cluster0.rgaym.gcp.mongodb.net/bug-tracker?retryWrites=true&w=majority",() => {
     console.log("MONGOOSE CONNECTION ESTABLISHED")
 })
 .then(() => {

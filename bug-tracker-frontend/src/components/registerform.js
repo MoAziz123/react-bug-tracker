@@ -44,7 +44,8 @@ export class RegisterForm extends React.Component
      */
     checkFields = ()=>{
         if(this.state.user.email === null || this.state.user.password === null || this.state.user.username === null || this.state.user.address === null)
-            return true
+            return false
+        return true
     }
     /**
      * handleSubmit()
@@ -73,6 +74,9 @@ export class RegisterForm extends React.Component
             }
             else
                 this.setState({message:"Please ensure your details are     correct"})
+        }
+        else{
+            this.setState({message:"Please fill in all fields."})
         }
        
     }
