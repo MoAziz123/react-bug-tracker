@@ -30,10 +30,6 @@ export class LogInForm extends React.Component
             e.preventDefault()
             let password = crypto.MD5(this.state.password).toString()
             Axios.post("http://localhost:8080/login/submit",{
-                headers:
-                {
-                    'x-access-token':localStorage.getItem("token")
-                },
                 email:this.state.email,
                 password:password
                 
@@ -70,7 +66,7 @@ export class LogInForm extends React.Component
                     Password:
                     <Form.Control type="password"onChange={(e)=>this.setState({password:e.target.value})}></Form.Control>
                     <Button type="button" onClick={(e)=>this.handleSubmit(e)}>Log In</Button>
-                    <text>or</text>
+                    <p>or</p>
                     <Button type="button" onClick={(e)=>window.location.assign("http://localhost:3000/register")}>Register</Button>
                 </Form>
             </div>

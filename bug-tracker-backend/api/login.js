@@ -31,12 +31,20 @@ router.post('/login/new', (req, res)=>{
         
         new_user.save()
         .then((user)=>{
+            if(user)
             return res.json({
                     message:"Account successfully created",
                     success:true,
                     user:user,
                     auth:true
-                })})
+                })
+            else{
+                return res.json({
+                    message:"Unable to create account",
+                    auth:false,
+                    success:true
+                })}
+            })
         .catch((error)=>console.error(error))
     })
     .catch((error)=>console.log(error))

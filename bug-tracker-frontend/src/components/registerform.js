@@ -37,6 +37,16 @@ export class RegisterForm extends React.Component
             return true
     }
     /**
+     * checkFields()
+     * @args - none
+     * @description - checks the field for null values
+     * @since 1.0.0
+     */
+    checkFields = ()=>{
+        if(this.state.user.email === null || this.state.user.password === null || this.state.user.username === null || this.state.user.address === null)
+            return true
+    }
+    /**
      * handleSubmit()
      * @args - event
      * @description - triggered on form submit, it checks for validated fields, and then sends all the fields' values to create a new account
@@ -46,22 +56,25 @@ export class RegisterForm extends React.Component
      */
     handleSubmit=(e)=>{
         e.preventDefault()
-        if(this.checkValidate()){
-            let password = crypto.MD5(this.state.user.password).toString()
-            Axios.post("http://localhost:8080/login/new",{
-                username: this.state.user.username,
-                password:password,
-                email:this.state.user.email,
-                address:this.state.user.address
-            })
-            .then((response)=>{
-                this.setState({message:response.data.message})
-                if(response.data.auth)
-                window.location.assign("http://localhost:3000/login") 
-            })
+        if(this.checkFields()){
+            if(this.checkValidate()){
+                let password = crypto.MD5(this.state.user.password).toString()
+                Axios.post("http://localhost:8080/login/new",{
+                    username: this.state.user.username,
+                    password:password,
+                    email:this.state.user.email,
+                    address:this.state.user.address
+                })
+                .then((response)=>{
+                    this.setState({message:response.data.message})
+                    if(response.data.auth)
+                    window.location.assign("http://localhost:3000/login") 
+                })
+            }
+            else
+                this.setState({message:"Please ensure your details are     correct"})
         }
-        else
-            this.setState({message:"Please ensure your details are     correct"})
+       
     }
 
     /**
@@ -170,7 +183,7 @@ export class RegisterForm extends React.Component
                 validate:
                 {
                     username:this.state.validate.username,
-                    password:this.state.user.password,
+                    password:this.state.validate.password,
                     email:null,
                     address:this.state.validate.address
                 }

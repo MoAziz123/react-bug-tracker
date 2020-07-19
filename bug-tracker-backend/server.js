@@ -34,6 +34,7 @@ app.use('/', (req,res,next)=>{
         
         return next()
     }
+    next()
 })
 
 /** Configure Routes */
@@ -41,12 +42,7 @@ app.use('/', require('./api/bugs'))
 app.use('/', require('./api/login'))
 
 /** Launch 🚀 */
-mongoose.connect("mongodb://localhost:27017/bug-tracker", 
-{
-  useFindAndModify: false,
-  useNewUrlParser: true, 
-  useUnifiedTopology: true
-},() => {
+mongoose.connect("mongodb://localhost:27017/bug-tracker",() => {
     console.log("MONGOOSE CONNECTION ESTABLISHED")
 })
 .then(() => {
