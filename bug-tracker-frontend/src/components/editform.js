@@ -1,8 +1,7 @@
 import React  from 'react'
-import {Form, Button, Alert, Modal} from 'react-bootstrap'
-import {Router} from 'react-router'
+import {Form, Button,  Modal} from 'react-bootstrap'
 import Axios from 'axios'
-import moment from 'moment'
+
 
 export class EditForm extends React.Component        
 {
@@ -151,7 +150,6 @@ export class EditForm extends React.Component
     }
 
     updateLogDate=e=>{
-        let now = Date.now()
         if(new Date(e.target.value).getTime() >=  Date.now()){
             this.setState(
                 {

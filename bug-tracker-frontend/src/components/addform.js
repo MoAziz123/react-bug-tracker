@@ -1,9 +1,7 @@
 import React  from 'react'
-import {Form, Button, Alert, Modal} from 'react-bootstrap'
+import {Form, Button,  Modal} from 'react-bootstrap'
 import Axios from 'axios'
-import crypto from 'crypto-js'
-import jwt from 'jsonwebtoken'
-import {Redirect}from 'react-router'
+
 
 export class AddForm extends React.Component
 {
@@ -52,6 +50,7 @@ export class AddForm extends React.Component
             if(!response.data.auth){
                 localStorage.removeItem("token")
                 window.location.assign("http://localhost:3000/login")
+
             }
             this.setState({message:response.data.message,added:true})
         })

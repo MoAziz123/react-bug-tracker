@@ -1,6 +1,6 @@
 import React  from 'react'
 import {Form, Button, Alert} from 'react-bootstrap'
-import {Router,Redirect} from 'react-router'
+import {Redirect} from 'react-router'
 import Axios from 'axios'
 import crypto from  'crypto-js'
 export class RegisterForm extends React.Component

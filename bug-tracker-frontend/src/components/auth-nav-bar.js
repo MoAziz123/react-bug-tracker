@@ -4,10 +4,7 @@ import {Redirect} from  'react-router'
 
 export class AuthNavigation extends React.Component
 {
-    constructor()
-    {
-        super()
-    }
+  
     /**
      * handleLogOut()
      * @args - none

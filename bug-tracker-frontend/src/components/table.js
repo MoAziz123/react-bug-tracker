@@ -1,11 +1,9 @@
 import React  from 'react'
-import  {Alert, Button} from 'react-bootstrap'
+import  {Alert} from 'react-bootstrap'
 import Axios from 'axios'
-import { SearchBar } from './search-bar'
 import {AddForm} from  './addform'
 import {EditForm} from './editform'
 import {DeleteForm} from  './deleteform'
-import crypto from 'crypto-js'
 
 export class Table extends React.Component
 {
@@ -81,7 +79,6 @@ export class Table extends React.Component
     handleQuery = (e) => 
     {
         var query = e.target.value
-        console.log(query.length)
         if(query != null){
             Axios.get("http://localhost:8080/bugs/"+this.state.user_id,{
                 headers:{
@@ -113,7 +110,7 @@ export class Table extends React.Component
     }
     render()
     {
-        if(this.state.bugs.length == 0){
+        if(this.state.bugs.length === 0){
             return(
             <div className="table-error">
             <Alert type="error">No bugs found</Alert>

@@ -1,5 +1,5 @@
 import React  from 'react'
-import {Form, Button, Alert, Modal} from 'react-bootstrap'
+import {Button, Modal} from 'react-bootstrap'
 import Axios from 'axios'
 
 export class DeleteForm extends React.Component

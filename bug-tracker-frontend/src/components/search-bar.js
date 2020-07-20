@@ -1,7 +1,6 @@
 import React  from 'react'
-import {Form, Button, Alert, Modal} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 import Axios from 'axios'
-import  Select from  'react-select'
 
 export class SearchBar extends React.Component
 {
