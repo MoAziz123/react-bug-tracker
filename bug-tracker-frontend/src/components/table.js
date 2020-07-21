@@ -24,9 +24,9 @@ export class Table extends React.Component
      * @description - loads table data by sending a GET request to /bugs
      * @since 1.0.0
      */
-    componentWillMount(){
+     componentWillMount = async() =>{
         let id=localStorage.getItem("user_id")
-        Axios.get('http://localhost:8080/bugs/'+id,{
+        await Axios.get('http://localhost:8080/bugs/'+id,{
             headers:{
             'x-access-token':localStorage.getItem("token")
         }})
@@ -76,11 +76,11 @@ export class Table extends React.Component
      * @description - gets the bugs data of user, and then filters through it and selects the values that contain the query
      *  @since 1.0.0
      */
-    handleQuery = (e) => 
+    handleQuery = async (e) => 
     {
         var query = e.target.value
         if(query != null){
-            Axios.get("http://localhost:8080/bugs/"+this.state.user_id,{
+            await Axios.get("http://localhost:8080/bugs/"+this.state.user_id,{
                 headers:{
                 'x-access-token':localStorage.getItem("token")
                 }
@@ -96,7 +96,7 @@ export class Table extends React.Component
             .catch((error) =>console.error(error))
         }
         else{
-            Axios.post("http://localhost:8080/bugs",{
+            await Axios.post("http://localhost:8080/bugs",{
                 headers:{
                 'x-access-token':localStorage.getItem("token")
                 },

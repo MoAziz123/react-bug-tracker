@@ -15,9 +15,9 @@ export class SearchBar extends React.Component
     }
     
 
-    handleClick = (e) => {
+    handleClick = async (e) => {
         var query = this.state.value
-        Axios.get("http://localhost:8080/bugs", {title:this.state.value})
+        await Axios.get("http://localhost:8080/bugs", {title:this.state.value})
         .then((response)=>{
             if(!response.data.auth){
                 localStorage.removeItem("token")

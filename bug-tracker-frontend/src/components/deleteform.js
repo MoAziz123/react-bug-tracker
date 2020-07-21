@@ -14,8 +14,8 @@ export class DeleteForm extends React.Component
      * @description - sends id to delete from bugs table
      * @since 1.0.0
      */
-    handleDelete=()=>{
-        Axios.delete("http://localhost:8080/bugs/delete",{
+    handleDelete=async ()=>{
+        await Axios.delete("http://localhost:8080/bugs/delete",{
             headers:
             {
                 'x-access-token':localStorage.getItem("token")
